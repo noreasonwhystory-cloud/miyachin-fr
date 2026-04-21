@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+venv/
+ENV/
+logs/*.log
+ws_dump.txt
+ws_sent.txt
+analyze_ws.py
+*.webp
+*.png
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store

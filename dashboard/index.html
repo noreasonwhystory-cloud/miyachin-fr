@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTCC TradFi Spread Monitor | Premium Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #05060a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-glow: rgba(59, 130, 246, 0.4);
+            --accent-color: #60a5fa;
+            --success-color: #34d399;
+            --error-color: #fb7185;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --nav-bg: rgba(5, 6, 10, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+        }
+
+        /* 
+           Glassmorphism Common
+        */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+
+        header {
+            padding: 1.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-pill {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-color);
+            box-shadow: 0 0 10px var(--success-color);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .container {
+            padding: 3rem 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(96, 165, 250, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 2.4rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(to bottom, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 
+           Table Container
+        */
+        .table-wrapper {
+            padding: 1px;
+            background: linear-gradient(135deg, var(--glass-border) 0%, transparent 100%);
+            border-radius: 24px;
+        }
+
+        .table-container {
+            background: rgba(10, 11, 16, 0.6);
+            border-radius: 23px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+        }
+
+        th {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        td {
+            padding: 1.4rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-family: 'JetBrains Mono', monospace;
+            transition: background 0.2s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .symbol-cell {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .symbol-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .symbol-name-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .symbol-ticker {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .symbol-fullname {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .category-pill {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+
+        .spread-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .spread-val {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .spread-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .low-spread { background: rgba(52, 211, 153, 0.15); color: var(--success-color); }
+        .high-spread { background: rgba(251, 113, 133, 0.15); color: var(--error-color); }
+
+        /* 
+           Animations
+        */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @media (max-width: 1024px) {
+            .container { padding: 2rem 5%; }
+            th:nth-child(3), td:nth-child(3),
+            th:nth-child(4), td:nth-child(4) { display: none; }
+        }
+
+        @media (max-width: 640px) {
+            header { padding: 1rem 5%; }
+            .logo { font-size: 1.2rem; }
+            .stat-value { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">📊 BTCC <span>TradFi</span> Monitor</div>
+        <div id="status-container" class="status-pill">
+            <span class="status-dot"></span>
+            <span id="last-update">Connecting...</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card glass">
+                <div class="stat-label">Lowest Spread</div>
+                <div id="min-spread" class="stat-value">--</div>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-label">Avg Market Spread</div>
+                <div id="avg-spread" class="stat-value">--</div>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-label">Global Symbols</div>
+                <div id="total-symbols" class="stat-value">--</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Category</th>
+                            <th>Bid Price</th>
+                            <th>Ask Price</th>
+                            <th style="text-align: right">Market Spread</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticker-body">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function updateDashboard() {
+            try {
+                // Fetch data from relative path
+                const response = await fetch('../logs/latest.json');
+                if (!response.ok) throw new Error('Data Source Unavailable');
+                const data = await response.json();
+
+                // Update Status
+                document.getElementById('last-update').innerText = `Live: ${data.last_updated.split(' ')[1]}`;
+                
+                const results = data.results.filter(r => r.success);
+                const tbody = document.getElementById('ticker-body');
+                
+                // Track statistics
+                let totalPct = 0;
+                let minPct = Infinity;
+
+                // Sort by spread_pct (lowest first)
+                results.sort((a, b) => a.spread_pct - b.spread_pct);
+
+                // Build table content
+                let html = '';
+                results.forEach((r, index) => {
+                    totalPct += r.spread_pct;
+                    if (r.spread_pct < minPct) minPct = r.spread_pct;
+
+                    const delay = index * 0.05;
+                    const pctClass = r.spread_pct < 0.05 ? 'low-spread' : (r.spread_pct > 0.3 ? 'high-spread' : '');
+                    const iconChar = r.symbol.charAt(0);
+
+                    html += `
+                        <tr class="animate-in" style="animation-delay: ${delay}s">
+                            <td>
+                                <div class="symbol-cell">
+                                    <div class="symbol-icon">${iconChar}</div>
+                                    <div class="symbol-name-group">
+                                        <span class="symbol-ticker">${r.symbol}</span>
+                                        <span class="symbol-fullname">${r.name}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="category-pill">${r.category}</span></td>
+                            <td>${r.bid.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 5})}</td>
+                            <td>${r.ask.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 5})}</td>
+                            <td style="text-align: right">
+                                <div class="spread-box">
+                                    <span class="spread-val">${r.spread.toFixed(4)}</span>
+                                    <span class="spread-badge ${pctClass}">${r.spread_pct.toFixed(4)}%</span>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                tbody.innerHTML = html;
+
+                // Update Stats
+                if (results.length > 0) {
+                    document.getElementById('min-spread').innerText = `${minPct.toFixed(4)}%`;
+                    document.getElementById('avg-spread').innerText = `${(totalPct / results.length).toFixed(4)}%`;
+                    document.getElementById('total-symbols').innerText = `${results.length} / ${data.results.length}`;
+                }
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('last-update').innerText = 'Sync Error';
+                document.querySelector('.status-dot').style.background = '#ef4444';
+                document.querySelector('.status-dot').style.boxShadow = '0 0 10px #ef4444';
+            }
+        }
+
+        // Initialize and setup polling
+        updateDashboard();
+        setInterval(updateDashboard, 5000);
+    </script>
+</body>
+</html>
