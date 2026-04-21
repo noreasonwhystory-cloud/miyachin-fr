@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTCC TradFi Spread Monitor | Premium Dashboard</title>
+    <title>BTCC TradFi | Premium Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
@@ -12,7 +12,6 @@
             --bg-color: #05060a;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-glow: rgba(59, 130, 246, 0.4);
             --accent-color: #60a5fa;
             --success-color: #34d399;
             --error-color: #fb7185;
@@ -21,423 +20,255 @@
             --nav-bg: rgba(5, 6, 10, 0.7);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+            background-image: radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
         }
 
-        /* 
-           Glassmorphism Common
-        */
         .glass {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
         }
 
         header {
-            padding: 1.5rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--nav-bg); backdrop-filter: blur(12px);
+            position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--glass-border);
         }
 
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 0%, #60a5fa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .logo { font-size: 1.4rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--accent-color); }
 
         .status-pill {
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 99px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.7rem; padding: 0.4rem 0.8rem; border-radius: 99px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border);
+            color: var(--text-secondary); display: flex; align-items: center; gap: 6px;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--success-color);
-            box-shadow: 0 0 10px var(--success-color);
-            animation: pulse-dot 2s infinite;
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success-color); }
+
+        .container { padding: 2rem 8%; max-width: 1200px; margin: 0 auto; }
+
+        /* Statistics */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { padding: 1.2rem; text-align: center; }
+        .stat-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.6rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+        /* Filter Controls */
+        .filter-section { margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .filter-btn {
+            padding: 0.6rem 1.2rem; border-radius: 12px; border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.02); color: var(--text-secondary);
+            font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+        }
+        .filter-btn:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+        .filter-btn.active {
+            background: var(--accent-color); color: #000; font-weight: 700; border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
         }
 
-        @keyframes pulse-dot {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .container {
-            padding: 3rem 8%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(96, 165, 250, 0.3);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .stat-value {
-            font-size: 2.4rem;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            background: linear-gradient(to bottom, #fff, #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* 
-           Table Container
-        */
-        .table-wrapper {
-            padding: 1px;
-            background: linear-gradient(135deg, var(--glass-border) 0%, transparent 100%);
-            border-radius: 24px;
-        }
-
-        .table-container {
-            background: rgba(10, 11, 16, 0.6);
-            border-radius: 23px;
-            overflow: hidden;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            text-align: left;
-        }
-
-        th {
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        td {
-            padding: 1.4rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            font-family: 'JetBrains Mono', monospace;
-            transition: background 0.2s ease;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .symbol-cell {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .symbol-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--accent-color);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        .symbol-name-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .symbol-ticker {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .symbol-fullname {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .category-pill {
-            font-size: 0.7rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 6px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-        }
-
-        .spread-box {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 4px;
-        }
-
-        .spread-val {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .spread-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-        }
-
+        /* Table */
+        .table-container { border-radius: 20px; overflow: hidden; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); }
+        table { width: 100%; border-collapse: collapse; }
+        th { padding: 1rem; font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; border-bottom: 1px solid var(--glass-border); text-align: left; }
+        td { padding: 1rem; border-bottom: 1px solid rgba(255, 255, 244, 0.02); font-family: 'JetBrains Mono', monospace; vertical-align: middle; }
+        
+        .symbol-ticker { font-size: 1rem; font-weight: 700; color: #fff; font-family: 'Outfit', sans-serif; display: block; }
+        .symbol-name { font-size: 0.7rem; color: var(--text-secondary); font-family: 'Outfit', sans-serif; }
+        
+        .spread-box { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+        .spread-val { font-size: 0.9rem; font-weight: 600; }
+        .spread-badge { font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700; }
         .low-spread { background: rgba(52, 211, 153, 0.15); color: var(--success-color); }
         .high-spread { background: rgba(251, 113, 133, 0.15); color: var(--error-color); }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Category Color Tags */
+        .category-dot { width: 4px; height: 12px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: middle; }
+        .cat-metals { background: #fbbf24; }
+        .cat-indices { background: #818cf8; }
+        .cat-forex { background: #34d399; }
+        .cat-stocks { background: #60a5fa; }
+        .cat-commodities { background: #f87171; }
 
-        .animate-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        /* 
-           Responsive Adjustments
-        */
-        @media (max-width: 1024px) {
-            .container { padding: 2rem 5%; }
-            th:nth-child(3), td:nth-child(3),
-            th:nth-child(4), td:nth-child(4) { display: none; }
-        }
-
+        /* Responsive - Table 2 Columns on Mobile */
         @media (max-width: 768px) {
-            .stat-value { font-size: 1.8rem; }
-            th, td { padding: 1rem; }
-        }
-
-        @media (max-width: 600px) {
-            .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .stat-card { padding: 1.5rem; }
+            header { padding: 1rem; }
             .container { padding: 1.5rem 1rem; }
-            header { padding: 1rem 1rem; }
+            .stats-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+            .stat-value { font-size: 2rem; }
+
+            /* 重要：スマホでは2列に絞る */
+            .col-hide-mobile { display: none !important; }
+            
+            th, td { padding: 0.8rem 0.5rem; }
+            .symbol-ticker { font-size: 0.9rem; }
+            .symbol-name { display: none; }
+            .spread-val { font-size: 0.85rem; }
         }
 
-        @media (max-width: 480px) {
-            /* 非常に狭い画面向けの最終調整 */
-            th:nth-child(2), td:nth-child(2) { display: none !important; }
-            th:nth-child(3), td:nth-child(3) { display: none !important; }
-            th:nth-child(4), td:nth-child(4) { display: none !important; }
-            
-            .symbol-icon { display: none !important; }
-            .symbol-ticker { font-size: 0.9rem; }
-            .symbol-fullname { display: none; } /* 名称を隠してティッカーのみに */
-            
-            .spread-val { font-size: 0.85rem; }
-            .spread-badge { font-size: 0.65rem; padding: 0.15rem 0.4rem; }
-            
-            td { padding: 0.6rem 0.3rem !important; }
-            th { padding: 0.8rem 0.3rem !important; }
-            
-            .stat-value { font-size: 1.5rem; }
-            .container { padding: 1rem 0.5rem; }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-row { animation: fadeIn 0.3s ease forwards; }
+
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">📊 <span>TradFi</span> Monitor</div>
-        <div id="status-container" class="status-pill">
+        <div class="status-pill">
             <span class="status-dot"></span>
-            <span id="last-update">Syncing...</span>
+            <span id="last-updated">Syncing...</span>
         </div>
     </header>
 
     <div class="container">
+        <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card glass">
-                <div class="stat-label">Min Spread</div>
-                <div id="min-spread" class="stat-value">--</div>
+                <div class="stat-label">Lowest</div>
+                <div id="stat-min" class="stat-value">--</div>
             </div>
             <div class="stat-card glass">
-                <div class="stat-label">Avg Spread</div>
-                <div id="avg-spread" class="stat-value">--</div>
+                <div class="stat-label">Average</div>
+                <div id="stat-avg" class="stat-value">--</div>
             </div>
             <div class="stat-card glass">
-                <div class="stat-label">Total</div>
-                <div id="total-symbols" class="stat-value">--</div>
+                <div class="stat-label">Active</div>
+                <div id="stat-count" class="stat-value">--</div>
             </div>
         </div>
 
-        <div class="table-wrapper">
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Asset</th>
-                            <th>Category</th>
-                            <th>Bid</th>
-                            <th>Ask</th>
-                            <th style="text-align: right">Spread</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ticker-body">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
+        <!-- Filters -->
+        <div class="filter-section" id="filter-container">
+            <!-- Buttons will be injected here -->
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asset</th>
+                        <th class="col-hide-mobile">Category</th>
+                        <th class="col-hide-mobile">Bid</th>
+                        <th class="col-hide-mobile">Ask</th>
+                        <th style="text-align: right">Spread</th>
+                    </tr>
+                </thead>
+                <tbody id="ticker-body"></tbody>
+            </table>
         </div>
     </div>
 
     <script>
-        async function updateDashboard() {
+        // State management
+        let allData = [];
+        let activeCategories = new Set(['metals', 'indices', 'forex', 'stocks', 'commodities']);
+        const CATEGORY_MAP = {
+            'metals': 'Metals',
+            'indices': 'Indices',
+            'forex': 'Forex',
+            'stocks': 'Stocks',
+            'commodities': 'Commodities'
+        };
+
+        async function fetchData() {
             try {
-                // キャッシュ回避のためクエリパラメータを追加
                 const response = await fetch('../logs/latest.json?t=' + Date.now());
-                if (!response.ok) throw new Error('Data Source Unavailable');
                 const data = await response.json();
-
-                // 時刻のみ表示
-                const timeStr = data.last_updated.includes(' ') ? data.last_updated.split(' ')[1] : data.last_updated;
-                document.getElementById('last-update').innerText = `Live: ${timeStr}`;
+                allData = data.results.filter(r => r.success);
+                document.getElementById('last-updated').innerText = `Live: ${data.last_updated.split(' ')[1]}`;
                 
-                const results = data.results.filter(r => r.success);
-                const tbody = document.getElementById('ticker-body');
-                
-                // Track statistics
-                let totalPct = 0;
-                let minPct = Infinity;
-
-                // Sort by spread_pct (lowest first)
-                results.sort((a, b) => a.spread_pct - b.spread_pct);
-
-                // Build table content
-                let html = '';
-                results.forEach((r, index) => {
-                    totalPct += r.spread_pct;
-                    if (r.spread_pct < minPct) minPct = r.spread_pct;
-
-                    const delay = index * 0.05;
-                    const pctClass = r.spread_pct < 0.05 ? 'low-spread' : (r.spread_pct > 0.3 ? 'high-spread' : '');
-                    const iconChar = r.symbol.charAt(0);
-
-                    html += `
-                        <tr class="animate-in" style="animation-delay: ${delay}s">
-                            <td>
-                                <div class="symbol-cell">
-                                    <div class="symbol-icon">${iconChar}</div>
-                                    <div class="symbol-name-group">
-                                        <span class="symbol-ticker">${r.symbol}</span>
-                                        <span class="symbol-fullname">${r.name}</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="category-pill">${r.category}</span></td>
-                            <td>${r.bid.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 5})}</td>
-                            <td>${r.ask.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 5})}</td>
-                            <td style="text-align: right">
-                                <div class="spread-box">
-                                    <span class="spread-val">${r.spread.toFixed(4)}</span>
-                                    <span class="spread-badge ${pctClass}">${r.spread_pct.toFixed(4)}%</span>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                });
-
-                tbody.innerHTML = html;
-
-                // Update Stats
-                if (results.length > 0) {
-                    document.getElementById('min-spread').innerText = `${minPct.toFixed(4)}%`;
-                    document.getElementById('avg-spread').innerText = `${(totalPct / results.length).toFixed(4)}%`;
-                    document.getElementById('total-symbols').innerText = `${results.length} / ${data.results.length}`;
-                }
-
+                renderFilters();
+                renderTable();
             } catch (err) {
                 console.error(err);
-                document.getElementById('last-update').innerText = 'Sync Error';
-                document.querySelector('.status-dot').style.background = '#ef4444';
-                document.querySelector('.status-dot').style.boxShadow = '0 0 10px #ef4444';
+                document.getElementById('last-updated').innerText = 'Sync Error';
             }
         }
 
-        // Initialize and setup polling
-        updateDashboard();
-        setInterval(updateDashboard, 5000);
+        function renderFilters() {
+            const container = document.getElementById('filter-container');
+            const categories = [...new Set(allData.map(r => r.category))];
+            
+            // カテゴリのボタンを生成（一度だけ生成し、状態を反映）
+            let html = '';
+            categories.sort().forEach(cat => {
+                const activeClass = activeCategories.has(cat) ? 'active' : '';
+                const label = CATEGORY_MAP[cat] || cat;
+                html += `<button class="filter-btn ${activeClass}" onclick="toggleCategory('${cat}')">${label}</button>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function toggleCategory(cat) {
+            if (activeCategories.has(cat)) {
+                activeCategories.delete(cat);
+            } else {
+                activeCategories.add(cat);
+            }
+            renderFilters();
+            renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('ticker-body');
+            const filtered = allData.filter(r => activeCategories.has(r.category));
+            
+            // Stats
+            if (filtered.length > 0) {
+                const spreads = filtered.map(r => r.spread_pct);
+                const min = Math.min(...spreads);
+                const avg = spreads.reduce((a, b) => a + b, 0) / spreads.length;
+                
+                document.getElementById('stat-min').innerText = `${min.toFixed(4)}%`;
+                document.getElementById('stat-avg').innerText = `${avg.toFixed(4)}%`;
+                document.getElementById('stat-count').innerText = `${filtered.length}`;
+            }
+
+            // Table rows
+            filtered.sort((a, b) => a.spread_pct - b.spread_pct);
+            let html = '';
+            filtered.forEach((r, idx) => {
+                const pctClass = r.spread_pct < 0.05 ? 'low-spread' : (r.spread_pct > 0.3 ? 'high-spread' : '');
+                const catClass = `cat-${r.category}`;
+                
+                html += `
+                    <tr class="animate-row" style="animation-delay: ${idx * 0.02}s">
+                        <td>
+                            <span class="category-dot ${catClass}"></span>
+                            <div style="display: inline-block; vertical-align: middle;">
+                                <span class="symbol-ticker">${r.symbol}</span>
+                                <span class="symbol-name">${r.name}</span>
+                            </div>
+                        </td>
+                        <td class="col-hide-mobile"><span style="font-size: 0.7rem; color: var(--text-secondary)">${r.category.toUpperCase()}</span></td>
+                        <td class="col-hide-mobile">${r.bid.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        <td class="col-hide-mobile">${r.ask.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        <td style="text-align: right">
+                            <div class="spread-box">
+                                <span class="spread-val">${r.spread.toFixed(4)}</span>
+                                <span class="spread-badge ${pctClass}">${r.spread_pct.toFixed(4)}%</span>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // Initial load & Polling
+        fetchData();
+        setInterval(fetchData, 10000); // 10秒おきにフェッチ
     </script>
 </body>
 </html>
