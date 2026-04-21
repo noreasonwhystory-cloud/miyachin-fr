@@ -265,9 +265,6 @@
         .low-spread { background: rgba(52, 211, 153, 0.15); color: var(--success-color); }
         .high-spread { background: rgba(251, 113, 133, 0.15); color: var(--error-color); }
 
-        /* 
-           Animations
-        */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -277,16 +274,40 @@
             animation: fadeIn 0.5s ease forwards;
         }
 
+        /* 
+           Responsive Adjustments
+        */
         @media (max-width: 1024px) {
             .container { padding: 2rem 5%; }
             th:nth-child(3), td:nth-child(3),
             th:nth-child(4), td:nth-child(4) { display: none; }
         }
 
-        @media (max-width: 640px) {
-            header { padding: 1rem 5%; }
-            .logo { font-size: 1.2rem; }
+        @media (max-width: 768px) {
             .stat-value { font-size: 1.8rem; }
+            th, td { padding: 1rem; }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .stat-card { padding: 1.5rem; }
+            .container { padding: 1.5rem 1rem; }
+            header { padding: 1rem 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            /* Hide Category on small phones to prioritize Spread */
+            th:nth-child(2), td:nth-child(2) { display: none; }
+            
+            .symbol-icon { display: none; } /* Gains 50px of space */
+            .symbol-ticker { font-size: 1rem; }
+            .symbol-fullname { font-size: 0.7rem; }
+            
+            .spread-val { font-size: 0.9rem; }
+            .spread-badge { font-size: 0.7rem; }
+            
+            td { padding: 0.8rem 0.5rem; }
+            th { padding: 1rem 0.5rem; }
         }
     </style>
 </head>
