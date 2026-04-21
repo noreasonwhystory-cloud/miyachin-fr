@@ -296,43 +296,48 @@
         }
 
         @media (max-width: 480px) {
-            /* Hide Category on small phones to prioritize Spread */
-            th:nth-child(2), td:nth-child(2) { display: none; }
+            /* 非常に狭い画面向けの最終調整 */
+            th:nth-child(2), td:nth-child(2) { display: none !important; }
+            th:nth-child(3), td:nth-child(3) { display: none !important; }
+            th:nth-child(4), td:nth-child(4) { display: none !important; }
             
-            .symbol-icon { display: none; } /* Gains 50px of space */
-            .symbol-ticker { font-size: 1rem; }
-            .symbol-fullname { font-size: 0.7rem; }
+            .symbol-icon { display: none !important; }
+            .symbol-ticker { font-size: 0.9rem; }
+            .symbol-fullname { display: none; } /* 名称を隠してティッカーのみに */
             
-            .spread-val { font-size: 0.9rem; }
-            .spread-badge { font-size: 0.7rem; }
+            .spread-val { font-size: 0.85rem; }
+            .spread-badge { font-size: 0.65rem; padding: 0.15rem 0.4rem; }
             
-            td { padding: 0.8rem 0.5rem; }
-            th { padding: 1rem 0.5rem; }
+            td { padding: 0.6rem 0.3rem !important; }
+            th { padding: 0.8rem 0.3rem !important; }
+            
+            .stat-value { font-size: 1.5rem; }
+            .container { padding: 1rem 0.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">📊 BTCC <span>TradFi</span> Monitor</div>
+        <div class="logo">📊 <span>TradFi</span> Monitor</div>
         <div id="status-container" class="status-pill">
             <span class="status-dot"></span>
-            <span id="last-update">Connecting...</span>
+            <span id="last-update">Syncing...</span>
         </div>
     </header>
 
     <div class="container">
         <div class="stats-grid">
             <div class="stat-card glass">
-                <div class="stat-label">Lowest Spread</div>
+                <div class="stat-label">Min Spread</div>
                 <div id="min-spread" class="stat-value">--</div>
             </div>
             <div class="stat-card glass">
-                <div class="stat-label">Avg Market Spread</div>
+                <div class="stat-label">Avg Spread</div>
                 <div id="avg-spread" class="stat-value">--</div>
             </div>
             <div class="stat-card glass">
-                <div class="stat-label">Global Symbols</div>
+                <div class="stat-label">Total</div>
                 <div id="total-symbols" class="stat-value">--</div>
             </div>
         </div>
@@ -344,9 +349,9 @@
                         <tr>
                             <th>Asset</th>
                             <th>Category</th>
-                            <th>Bid Price</th>
-                            <th>Ask Price</th>
-                            <th style="text-align: right">Market Spread</th>
+                            <th>Bid</th>
+                            <th>Ask</th>
+                            <th style="text-align: right">Spread</th>
                         </tr>
                     </thead>
                     <tbody id="ticker-body">
@@ -360,13 +365,14 @@
     <script>
         async function updateDashboard() {
             try {
-                // Fetch data from relative path
-                const response = await fetch('../logs/latest.json');
+                // キャッシュ回避のためクエリパラメータを追加
+                const response = await fetch('../logs/latest.json?t=' + Date.now());
                 if (!response.ok) throw new Error('Data Source Unavailable');
                 const data = await response.json();
 
-                // Update Status
-                document.getElementById('last-update').innerText = `Live: ${data.last_updated.split(' ')[1]}`;
+                // 時刻のみ表示
+                const timeStr = data.last_updated.includes(' ') ? data.last_updated.split(' ')[1] : data.last_updated;
+                document.getElementById('last-update').innerText = `Live: ${timeStr}`;
                 
                 const results = data.results.filter(r => r.success);
                 const tbody = document.getElementById('ticker-body');
