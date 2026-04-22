@@ -204,7 +204,7 @@
             try {
                 const response = await fetch('../logs/latest.json?t=' + Date.now());
                 const data = await response.json();
-                allData = data.results.filter(r => r.success);
+                allData = data.results; // Do not filter out failed items, to show them as "--"
                 // Update header status
                 const timeStr = data.last_updated.includes(' ') ? data.last_updated.split(' ')[1] : data.last_updated;
                 document.getElementById('last-updated').innerText = `Live: ${timeStr}`;
@@ -256,21 +256,29 @@
             const filtered = allData.filter(r => activeCategories.has(r.category));
             
             // Stats
-            if (filtered.length > 0) {
-                const spreads = filtered.map(r => r.spread_pct);
+            const succ = filtered.filter(r => r.success);
+            if (succ.length > 0) {
+                const spreads = succ.map(r => r.spread_pct);
                 const min = Math.min(...spreads);
                 const avg = spreads.reduce((a, b) => a + b, 0) / spreads.length;
                 
                 document.getElementById('stat-min').innerText = `${min.toFixed(4)}%`;
                 document.getElementById('stat-avg').innerText = `${avg.toFixed(4)}%`;
-                document.getElementById('stat-count').innerText = `${filtered.length}`;
+                document.getElementById('stat-count').innerText = `${succ.length} / ${filtered.length}`;
+            } else {
+                document.getElementById('stat-min').innerText = `--`;
+                document.getElementById('stat-avg').innerText = `--`;
+                document.getElementById('stat-count').innerText = `${succ.length} / ${filtered.length}`;
             }
 
             // Table rows
-            filtered.sort((a, b) => a.spread_pct - b.spread_pct);
+            filtered.sort((a, b) => {
+                if (a.success !== b.success) return b.success ? 1 : -1; 
+                return a.spread_pct - b.spread_pct;
+            });
             let html = '';
             filtered.forEach((r, idx) => {
-                const pctClass = r.spread_pct < 0.05 ? 'low-spread' : (r.spread_pct > 0.3 ? 'high-spread' : '');
+                const pctClass = r.success ? (r.spread_pct < 0.05 ? 'low-spread' : (r.spread_pct > 0.3 ? 'high-spread' : '')) : '';
                 const catClass = `cat-${r.category}`;
                 
                 // Earnings UI
@@ -279,24 +287,30 @@
                 const soonBadge = soon ? '<span class="soon-badge">Soon</span>' : '';
                 const earningsHtml = r.earnings_date ? `<span class="earnings-date">${displayDate}${soonBadge}</span>` : '--';
                 
+                const bidDisplay = r.success ? r.bid.toLocaleString(undefined, {minimumFractionDigits: 2}) : '--';
+                const askDisplay = r.success ? r.ask.toLocaleString(undefined, {minimumFractionDigits: 2}) : '--';
+                const spreadDisplay = r.success ? r.spread.toFixed(4) : '--';
+                const spreadPctDisplay = r.success ? `${r.spread_pct.toFixed(4)}%` : 'N/A';
+
                 html += `
-                    <tr class="animate-row" style="animation-delay: ${idx * 0.02}s">
+                    <tr class="animate-row" style="animation-delay: ${idx * 0.02}s; ${r.success ? '' : 'opacity: 0.5;'}">
                         <td>
                             <span class="category-dot ${catClass}"></span>
                             <div style="display: inline-block; vertical-align: middle;">
                                 <span class="symbol-ticker">${r.symbol}</span>
                                 <span class="symbol-name">${r.name}</span>
                                 ${r.earnings_date ? `<span class="mobile-earnings">Next: ${displayDate}${soon ? ' (Soon)' : ''}</span>` : ''}
+                                ${!r.success ? `<span class="mobile-earnings" style="color:var(--error-color)">Closed / No Data</span>` : ''}
                             </div>
                         </td>
                         <td class="col-hide-mobile"><span style="font-size: 0.7rem; color: var(--text-secondary)">${r.category.toUpperCase()}</span></td>
-                        <td class="col-hide-mobile">${r.bid.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                        <td class="col-hide-mobile">${r.ask.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        <td class="col-hide-mobile">${bidDisplay}</td>
+                        <td class="col-hide-mobile">${askDisplay}</td>
                         <td class="col-hide-mobile">${earningsHtml}</td>
                         <td style="text-align: right">
                             <div class="spread-box">
-                                <span class="spread-val">${r.spread.toFixed(4)}</span>
-                                <span class="spread-badge ${pctClass}">${r.spread_pct.toFixed(4)}%</span>
+                                <span class="spread-val">${spreadDisplay}</span>
+                                <span class="spread-badge ${pctClass}">${spreadPctDisplay}</span>
                             </div>
                         </td>
                     </tr>

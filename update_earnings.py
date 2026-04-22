@@ -42,12 +42,12 @@ def fetch_earnings_dates():
                     earnings_map[btcc_symbol] = earnings_date
                     logger.info(f"SUCCESS: {btcc_symbol} (YF:{yf_symbol}) -> {earnings_date}")
                 else:
-                    logger.warning(f"NO DATE: {symbol} (Calendar found but no dates)")
+                    logger.warning(f"NO DATE: {btcc_symbol} (Calendar found but no dates)")
             else:
-                logger.warning(f"NO CALENDAR: {symbol}")
+                logger.warning(f"NO CALENDAR: {btcc_symbol}")
                 
         except Exception as e:
-            logger.error(f"ERROR: {symbol} 取得失敗: {e}")
+            logger.error(f"ERROR: {btcc_symbol} 取得失敗: {e}")
 
     # 保存処理
     if not os.path.exists(LOG_DIR):
