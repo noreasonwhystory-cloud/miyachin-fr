@@ -1,53 +1,57 @@
 {
-  "last_updated": "2026-04-22 08:50:16",
+  "last_updated": "2026-04-22 09:19:11",
   "results": [
     {
       "symbol": "XAUUSD",
       "name": "ゴールド",
       "category": "metals",
-      "bid": 4737.04,
-      "ask": 4737.24,
+      "bid": 4744.06,
+      "ask": 4744.26,
       "spread": 0.2,
-      "spread_pct": 0.004222,
+      "spread_pct": 0.004216,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.1721969
+      "timestamp": 1776817166.8296301,
+      "earnings_date": null
     },
     {
       "symbol": "XAGUSD",
       "name": "シルバー",
       "category": "metals",
-      "bid": 77.288,
-      "ask": 77.389,
-      "spread": 0.101,
-      "spread_pct": 0.130595,
+      "bid": 77.422,
+      "ask": 77.526,
+      "spread": 0.104,
+      "spread_pct": 0.134239,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.3876836
+      "timestamp": 1776817166.7083225,
+      "earnings_date": null
     },
     {
       "symbol": "XPTUSD",
       "name": "プラチナ",
       "category": "metals",
-      "bid": 2049.94,
-      "ask": 2059.96,
-      "spread": 10.02,
-      "spread_pct": 0.487603,
+      "bid": 2053.3,
+      "ask": 2063.14,
+      "spread": 9.84,
+      "spread_pct": 0.478083,
       "success": true,
       "error": null,
-      "timestamp": 1776815429.2970104
+      "timestamp": 1776817164.8777964,
+      "earnings_date": null
     },
     {
       "symbol": "XPDUSD",
       "name": "パラジウム",
       "category": "metals",
-      "bid": 1551.81,
-      "ask": 1559.22,
-      "spread": 7.41,
-      "spread_pct": 0.47637,
+      "bid": 1552.62,
+      "ask": 1559.95,
+      "spread": 7.33,
+      "spread_pct": 0.470993,
       "success": true,
       "error": null,
-      "timestamp": 1776815426.7552483
+      "timestamp": 1776817166.1306164,
+      "earnings_date": null
     },
     {
       "symbol": "XALUSD",
@@ -59,175 +63,190 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": null
     },
     {
       "symbol": "COPPER",
       "name": "銅",
       "category": "metals",
-      "bid": 601.5,
-      "ask": 601.9,
+      "bid": 602.22,
+      "ask": 602.62,
       "spread": 0.4,
-      "spread_pct": 0.066478,
+      "spread_pct": 0.066399,
       "success": true,
       "error": null,
-      "timestamp": 1776815425.5280654
+      "timestamp": 1776817162.9393258,
+      "earnings_date": null
     },
     {
       "symbol": "USOIL",
       "name": "原油(WTI)",
       "category": "commodities",
-      "bid": 89.66,
-      "ask": 91.52,
-      "spread": 1.86,
-      "spread_pct": 2.053207,
+      "bid": 88.907,
+      "ask": 88.943,
+      "spread": 0.036,
+      "spread_pct": 0.040484,
       "success": true,
       "error": null,
-      "timestamp": 1776815430.1510656
+      "timestamp": 1776817166.8808267,
+      "earnings_date": null
     },
     {
       "symbol": "UKOIL",
       "name": "原油(ブレント)",
       "category": "commodities",
-      "bid": null,
-      "ask": null,
-      "spread": null,
-      "spread_pct": null,
-      "success": false,
-      "error": "No WS data",
-      "timestamp": 0.0
+      "bid": 97.876,
+      "ask": 97.914,
+      "spread": 0.038,
+      "spread_pct": 0.038817,
+      "success": true,
+      "error": null,
+      "timestamp": 1776817166.7082527,
+      "earnings_date": null
     },
     {
       "symbol": "NGAS",
       "name": "天然ガス",
       "category": "commodities",
-      "bid": 2.8325,
-      "ask": 2.8455,
+      "bid": 2.8205,
+      "ask": 2.8335,
       "spread": 0.013,
-      "spread_pct": 0.457908,
+      "spread_pct": 0.459851,
       "success": true,
       "error": null,
-      "timestamp": 1776815426.2179716
+      "timestamp": 1776817160.3659868,
+      "earnings_date": null
     },
     {
       "symbol": "SP500",
       "name": "S&P 500",
       "category": "indices",
-      "bid": 7130.71,
-      "ask": 7131.04,
-      "spread": 0.33,
-      "spread_pct": 0.004628,
+      "bid": 7137.84,
+      "ask": 7138.16,
+      "spread": 0.32,
+      "spread_pct": 0.004483,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.4770634
+      "timestamp": 1776817166.9486158,
+      "earnings_date": null
     },
     {
       "symbol": "TECH100",
       "name": "NASDAQ 100",
       "category": "indices",
-      "bid": 26773.4,
-      "ask": 26773.85,
-      "spread": 0.45,
-      "spread_pct": 0.001681,
+      "bid": 26811.52,
+      "ask": 26811.98,
+      "spread": 0.46,
+      "spread_pct": 0.001716,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.0999048
+      "timestamp": 1776817165.647272,
+      "earnings_date": null
     },
     {
       "symbol": "DJ30",
       "name": "ダウ工業30",
       "category": "indices",
-      "bid": 49535.88,
-      "ask": 49537.12,
+      "bid": 49574.88,
+      "ask": 49576.12,
       "spread": 1.24,
-      "spread_pct": 0.002503,
+      "spread_pct": 0.002501,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.0997498
+      "timestamp": 1776817165.8921394,
+      "earnings_date": null
     },
     {
       "symbol": "GER30",
       "name": "ドイツDAX",
       "category": "indices",
-      "bid": null,
-      "ask": null,
-      "spread": null,
-      "spread_pct": null,
-      "success": false,
-      "error": "No WS data",
-      "timestamp": 0.0
+      "bid": 24409.4,
+      "ask": 24410.6,
+      "spread": 1.2,
+      "spread_pct": 0.004916,
+      "success": true,
+      "error": null,
+      "timestamp": 1776817165.8922076,
+      "earnings_date": null
     },
     {
       "symbol": "JPN225",
       "name": "日経225",
       "category": "indices",
-      "bid": 59125.0,
-      "ask": 59165.0,
-      "spread": 40.0,
-      "spread_pct": 0.06763,
+      "bid": 59336.03,
+      "ask": 59343.97,
+      "spread": 7.94,
+      "spread_pct": 0.013381,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.6036458
+      "timestamp": 1776817166.9624827,
+      "earnings_date": null
     },
     {
       "symbol": "UK100",
       "name": "FTSE 100",
       "category": "indices",
-      "bid": null,
-      "ask": null,
-      "spread": null,
-      "spread_pct": null,
-      "success": false,
-      "error": "No WS data",
-      "timestamp": 0.0
+      "bid": 10482.08,
+      "ask": 10482.92,
+      "spread": 0.84,
+      "spread_pct": 0.008013,
+      "success": true,
+      "error": null,
+      "timestamp": 1776817165.8923738,
+      "earnings_date": null
     },
     {
       "symbol": "GBPUSD",
       "name": "ポンド/ドル",
       "category": "forex",
-      "bid": 1.35075,
-      "ask": 1.35087,
-      "spread": 0.00012,
-      "spread_pct": 0.008884,
+      "bid": 1.35184,
+      "ask": 1.35194,
+      "spread": 0.0001,
+      "spread_pct": 0.007397,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.1720827
+      "timestamp": 1776817166.6987967,
+      "earnings_date": null
     },
     {
       "symbol": "EURUSD",
       "name": "ユーロ/ドル",
       "category": "forex",
-      "bid": 1.17424,
-      "ask": 1.17434,
-      "spread": 0.0001,
-      "spread_pct": 0.008516,
+      "bid": 1.17497,
+      "ask": 1.17509,
+      "spread": 0.00012,
+      "spread_pct": 0.010213,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.2468445
+      "timestamp": 1776817166.3508232,
+      "earnings_date": null
     },
     {
       "symbol": "AUDUSD",
       "name": "豪ドル/ドル",
       "category": "forex",
-      "bid": 0.71545,
-      "ask": 0.71555,
+      "bid": 0.71599,
+      "ask": 0.71609,
       "spread": 0.0001,
-      "spread_pct": 0.013976,
+      "spread_pct": 0.013966,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.0998309
+      "timestamp": 1776817166.8297045,
+      "earnings_date": null
     },
     {
       "symbol": "NZDUSD",
       "name": "NZドル/ドル",
       "category": "forex",
-      "bid": 0.5896,
-      "ask": 0.58968,
-      "spread": 8e-05,
-      "spread_pct": 0.013568,
+      "bid": 0.59051,
+      "ask": 0.59062,
+      "spread": 0.00011,
+      "spread_pct": 0.018626,
       "success": true,
       "error": null,
-      "timestamp": 1776815431.2469685
+      "timestamp": 1776817166.3508914,
+      "earnings_date": null
     },
     {
       "symbol": "AAPL",
@@ -239,7 +258,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-05-01"
     },
     {
       "symbol": "AMD",
@@ -251,7 +271,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-05-06"
     },
     {
       "symbol": "AMZN",
@@ -263,7 +284,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-04-30"
     },
     {
       "symbol": "COST",
@@ -275,7 +297,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-05-29"
     },
     {
       "symbol": "GOOG",
@@ -287,7 +310,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-04-30"
     },
     {
       "symbol": "INTEL",
@@ -299,7 +323,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-04-24"
     },
     {
       "symbol": "META",
@@ -311,7 +336,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-04-30"
     },
     {
       "symbol": "MSFT",
@@ -323,7 +349,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-04-30"
     },
     {
       "symbol": "MSTR",
@@ -335,7 +362,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-05-06"
     },
     {
       "symbol": "NFLX",
@@ -347,7 +375,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-07-17"
     },
     {
       "symbol": "NVIDIA",
@@ -359,7 +388,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-05-21"
     },
     {
       "symbol": "ORCL",
@@ -371,7 +401,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-06-11"
     },
     {
       "symbol": "PLTR",
@@ -383,7 +414,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-05-05"
     },
     {
       "symbol": "TSLA",
@@ -395,7 +427,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-04-23"
     },
     {
       "symbol": "TSM",
@@ -407,7 +440,8 @@
       "spread_pct": null,
       "success": false,
       "error": "No WS data",
-      "timestamp": 0.0
+      "timestamp": 0.0,
+      "earnings_date": "2026-07-16"
     }
   ]
 }

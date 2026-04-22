@@ -40,7 +40,23 @@ async def run_cycle(scraper: BTCCScraper, spread_logger, sys_logger):
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M:%S")
     sys_logger.info(f"--- サイクル開始: {now} ---")
 
+    # 決算日の読み込み
+    earnings_map = {}
+    earnings_path = os.path.join(LOG_DIR, "earnings.json")
+    if os.path.exists(earnings_path):
+        try:
+            with open(earnings_path, "r", encoding="utf-8") as f:
+                earning_data = json.load(f)
+                earnings_map = earning_data.get("data", {})
+        except Exception as e:
+            sys_logger.error(f"決算データ読み込み失敗: {e}")
+
     results = await scraper.get_all_spreads()
+
+    # 決算日データのマージ
+    for r in results:
+        if r.symbol in earnings_map:
+            r.earnings_date = earnings_map[r.symbol]
 
     # ログ出力
     for r in results:
@@ -52,6 +68,8 @@ async def run_cycle(scraper: BTCCScraper, spread_logger, sys_logger):
                 f"Bid: {r.bid:>12} | Ask: {r.ask:>12} | "
                 f"Spread: {r.spread:>10} | {r.spread_pct:>8}%"
             )
+            if r.earnings_date:
+                line += f" | Earnings: {r.earnings_date}"
             spread_logger.info(line)
         else:
             timestamp = datetime.now(JST).strftime("%Y-%m-%d %H:%M:%S")

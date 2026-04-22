@@ -91,6 +91,17 @@
         .low-spread { background: rgba(52, 211, 153, 0.15); color: var(--success-color); }
         .high-spread { background: rgba(251, 113, 133, 0.15); color: var(--error-color); }
 
+        /* Earnings Styles */
+        .earnings-date { font-size: 0.85rem; color: #fff; font-weight: 500; }
+        .soon-badge {
+            font-size: 0.65rem; padding: 0.1rem 0.4rem; border-radius: 4px; border: 1px solid var(--error-color);
+            color: var(--error-color); font-weight: 700; text-transform: uppercase; margin-left: 6px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; }
+        }
+
         /* Category Color Tags */
         .category-dot { width: 4px; height: 12px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: middle; }
         .cat-metals { background: #fbbf24; }
@@ -113,6 +124,13 @@
             .symbol-ticker { font-size: 0.9rem; }
             .symbol-name { display: none; }
             .spread-val { font-size: 0.85rem; }
+
+            /* Mobile Earnings Display */
+            .mobile-earnings { display: block; font-size: 0.65rem; color: var(--accent-color); margin-top: 4px; }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-earnings { display: none; }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -161,6 +179,7 @@
                         <th class="col-hide-mobile">Category</th>
                         <th class="col-hide-mobile">Bid</th>
                         <th class="col-hide-mobile">Ask</th>
+                        <th class="col-hide-desktop col-hide-mobile">Next Earnings</th>
                         <th style="text-align: right">Spread</th>
                     </tr>
                 </thead>
@@ -186,7 +205,9 @@
                 const response = await fetch('../logs/latest.json?t=' + Date.now());
                 const data = await response.json();
                 allData = data.results.filter(r => r.success);
-                document.getElementById('last-updated').innerText = `Live: ${data.last_updated.split(' ')[1]}`;
+                // Update header status
+                const timeStr = data.last_updated.includes(' ') ? data.last_updated.split(' ')[1] : data.last_updated;
+                document.getElementById('last-updated').innerText = `Live: ${timeStr}`;
                 
                 renderFilters();
                 renderTable();
@@ -220,6 +241,16 @@
             renderTable();
         }
 
+        function isSoon(dateStr) {
+            if (!dateStr) return false;
+            const target = new Date(dateStr);
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            const diffTime = target - today;
+            const diffDays = diffTime / (1000 * 60 * 60 * 24);
+            return diffDays >= 0 && diffDays <= 2; // 今日・明日・明後日
+        }
+
         function renderTable() {
             const tbody = document.getElementById('ticker-body');
             const filtered = allData.filter(r => activeCategories.has(r.category));
@@ -242,6 +273,12 @@
                 const pctClass = r.spread_pct < 0.05 ? 'low-spread' : (r.spread_pct > 0.3 ? 'high-spread' : '');
                 const catClass = `cat-${r.category}`;
                 
+                // Earnings UI
+                const displayDate = r.earnings_date ? r.earnings_date.substring(5) : '--'; // MM-DD
+                const soon = isSoon(r.earnings_date);
+                const soonBadge = soon ? '<span class="soon-badge">Soon</span>' : '';
+                const earningsHtml = r.earnings_date ? `<span class="earnings-date">${displayDate}${soonBadge}</span>` : '--';
+                
                 html += `
                     <tr class="animate-row" style="animation-delay: ${idx * 0.02}s">
                         <td>
@@ -249,11 +286,13 @@
                             <div style="display: inline-block; vertical-align: middle;">
                                 <span class="symbol-ticker">${r.symbol}</span>
                                 <span class="symbol-name">${r.name}</span>
+                                ${r.earnings_date ? `<span class="mobile-earnings">Next: ${displayDate}${soon ? ' (Soon)' : ''}</span>` : ''}
                             </div>
                         </td>
                         <td class="col-hide-mobile"><span style="font-size: 0.7rem; color: var(--text-secondary)">${r.category.toUpperCase()}</span></td>
                         <td class="col-hide-mobile">${r.bid.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                         <td class="col-hide-mobile">${r.ask.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        <td class="col-hide-mobile">${earningsHtml}</td>
                         <td style="text-align: right">
                             <div class="spread-box">
                                 <span class="spread-val">${r.spread.toFixed(4)}</span>

@@ -1,0 +1,39 @@
+name: Weekly Earnings Update
+
+on:
+  schedule:
+    # 毎週月曜日の午前0時 (UTC) に実行
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # 手動実行も可能にする
+
+jobs:
+  update-earnings:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install yfinance
+        # 必要ならプロジェクト全体の依存をインストール
+        pip install -r requirements.txt 
+
+    - name: Execute Update
+      run: python update_earnings.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add logs/earnings.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Weekly earnings update: $(date)" && git push)
