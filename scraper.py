@@ -162,19 +162,29 @@ class BTCCScraper:
             # 1. マッピング情報の取得 (action: Dict)
             if action == "Dict":
                 dict_info = data.get("data", {}).get("DictInfo", [])
+                initial_map_size = len(self._secid_map)
+                
                 for item in dict_info:
                     secid = str(item.get("SecID"))
                     short_name = str(item.get("ShortName", ""))
-                    # "GER30/USDX.150x" -> "GER30"
-                    symbol = short_name.split('/')[0].split('.')[0]
-                    # "AAPLUSDT" -> "AAPL"
-                    symbol_upper = symbol.upper()
-                    if symbol_upper.endswith("USDT") and symbol_upper != "USDT":
+                    
+                    # より堅牢なシンボル抽出
+                    # 例: "AAPL/USDT.50x" -> "AAPL", "GER30/USDX.150x" -> "GER30"
+                    base_symbol = short_name.split('/')[0].split('.')[0]
+                    symbol_upper = base_symbol.upper()
+                    
+                    # "AAPLUSDT" などの連結形式にも対応
+                    if symbol_upper.endswith("USDT") and len(symbol_upper) > 4:
                         symbol_upper = symbol_upper[:-4]
                     
                     self._secid_map[secid] = symbol_upper
                 
-                self.sys_logger.info(f"SecIDマッピングを更新: {len(self._secid_map)}件登録済み")
+                # 新しいマッピングが見つかった場合、購読を再発行（重要）
+                if len(self._secid_map) > initial_map_size:
+                    found_symbols = [s for s in self._secid_map.values() if s in self._symbols_map]
+                    self.sys_logger.info(f"SecIDマッピング更新: {len(self._secid_map)}件登録 (対象ヒット: {len(set(found_symbols))}/{len(self._symbols_map)})")
+                    # 非同期タスクとして購読トリガーを実行
+                    asyncio.create_task(self._trigger_bulk_subscription())
                 return
 
             # 2. 価格情報の更新 (action: tickinfo)
@@ -185,6 +195,7 @@ class BTCCScraper:
                     symbol = self._secid_map.get(secid)
                     
                     if symbol and symbol in self._symbols_map:
+                        # 複数のBid/Askから最良値を取得
                         bids = item.get("B", [])
                         asks = item.get("A", [])
                         
@@ -199,6 +210,7 @@ class BTCCScraper:
                                     mid = (ask + bid) / 2
                                     spread_pct = round((spread / mid) * 100, 6) if mid > 0 else 0.0
                                     
+                                    # データクラスを使用して保存
                                     self._price_buffer[symbol] = SpreadData(
                                         symbol=symbol,
                                         name=info["name"],
@@ -211,7 +223,7 @@ class BTCCScraper:
                                         timestamp=time.time()
                                     )
                             except (ValueError, TypeError):
-                                pass
+                                continue
         except Exception as e:
             self.sys_logger.error(f"WSデータ処理エラー: {e}")
 
