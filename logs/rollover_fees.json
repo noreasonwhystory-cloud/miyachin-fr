@@ -1,0 +1,12 @@
+{
+    "last_updated": "2026-04-22 09:52:30",
+    "default_rate": 0.0002,
+    "category_rates": {
+        "stocks": 0.0002,
+        "metals": 0.0002,
+        "forex": 0.0002,
+        "indices": 0.0002,
+        "commodities": 0.0002
+    },
+    "description": "BTCC TradFi Rollover Fee per day (0.02%)"
+}

@@ -179,7 +179,8 @@
                         <th class="col-hide-mobile">Category</th>
                         <th class="col-hide-mobile">Bid</th>
                         <th class="col-hide-mobile">Ask</th>
-                        <th class="col-hide-desktop col-hide-mobile">Next Earnings</th>
+                        <th class="col-hide-mobile">Next Earnings</th>
+                        <th class="col-hide-mobile">Interest/Day</th>
                         <th style="text-align: right">Spread</th>
                     </tr>
                 </thead>
@@ -279,6 +280,9 @@
                 const soonBadge = soon ? '<span class="soon-badge">Soon</span>' : '';
                 const earningsHtml = r.earnings_date ? `<span class="earnings-date">${displayDate}${soonBadge}</span>` : '--';
                 
+                // Interest UI
+                const interestPct = r.rollover_fee ? (r.rollover_fee * 100).toFixed(2) + '%' : '--';
+                
                 html += `
                     <tr class="animate-row" style="animation-delay: ${idx * 0.02}s">
                         <td>
@@ -286,13 +290,17 @@
                             <div style="display: inline-block; vertical-align: middle;">
                                 <span class="symbol-ticker">${r.symbol}</span>
                                 <span class="symbol-name">${r.name}</span>
-                                ${r.earnings_date ? `<span class="mobile-earnings">Next: ${displayDate}${soon ? ' (Soon)' : ''}</span>` : ''}
+                                <span class="mobile-earnings">
+                                    ${r.earnings_date ? `Next: ${displayDate}${soon ? ' (Soon)' : ''} | ` : ''}
+                                    ${r.rollover_fee ? `Int: ${interestPct}` : ''}
+                                </span>
                             </div>
                         </td>
                         <td class="col-hide-mobile"><span style="font-size: 0.7rem; color: var(--text-secondary)">${r.category.toUpperCase()}</span></td>
                         <td class="col-hide-mobile">${r.bid.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                         <td class="col-hide-mobile">${r.ask.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                         <td class="col-hide-mobile">${earningsHtml}</td>
+                        <td class="col-hide-mobile"><span style="color: var(--accent-color)">${interestPct}</span></td>
                         <td style="text-align: right">
                             <div class="spread-box">
                                 <span class="spread-val">${r.spread.toFixed(4)}</span>

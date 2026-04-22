@@ -1,0 +1,32 @@
+name: Daily Rollover Fee Update
+
+on:
+  schedule:
+    # 毎日午前0時 (UTC) に実行
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 手動実行可能
+
+jobs:
+  update-rollover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Execute Update
+      run: python update_rollover.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add logs/rollover_fees.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Daily rollover fee update: $(date)" && git push)
