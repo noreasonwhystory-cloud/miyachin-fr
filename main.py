@@ -40,10 +40,8 @@ async def run_cycle(scraper: BTCCScraper, spread_logger, sys_logger):
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M:%S")
     sys_logger.info(f"--- サイクル開始: {now} ---")
 
-    # 決算日および金利の読み込み
+    # 決算日の読み込み
     earnings_map = {}
-    rollover_map = {}
-    
     earnings_path = os.path.join(LOG_DIR, "earnings.json")
     if os.path.exists(earnings_path):
         try:
@@ -53,25 +51,12 @@ async def run_cycle(scraper: BTCCScraper, spread_logger, sys_logger):
         except Exception as e:
             sys_logger.error(f"決算データ読み込み失敗: {e}")
 
-    rollover_path = os.path.join(LOG_DIR, "rollover_fees.json")
-    if os.path.exists(rollover_path):
-        try:
-            with open(rollover_path, "r", encoding="utf-8") as f:
-                rollover_data = json.load(f)
-                # デフォルトレートまたはカテゴリ別レートを取得
-                default_rate = rollover_data.get("default_rate", 0.0002)
-                rollover_map = rollover_data.get("category_rates", {})
-        except Exception as e:
-            sys_logger.error(f"金利データ読み込み失敗: {e}")
-
     results = await scraper.get_all_spreads()
 
-    # メタデータのマージ (決算日 & 金利)
+    # 決算日データのマージ
     for r in results:
         if r.symbol in earnings_map:
             r.earnings_date = earnings_map[r.symbol]
-        # カテゴリに基づいて金利を設定
-        r.rollover_fee = rollover_map.get(r.category, 0.0002)
 
     # ログ出力
     for r in results:
@@ -85,8 +70,6 @@ async def run_cycle(scraper: BTCCScraper, spread_logger, sys_logger):
             )
             if r.earnings_date:
                 line += f" | Earnings: {r.earnings_date}"
-            if r.rollover_fee:
-                line += f" | Rollover: {r.rollover_fee * 100:.3f}%"
             spread_logger.info(line)
         else:
             timestamp = datetime.now(JST).strftime("%Y-%m-%d %H:%M:%S")

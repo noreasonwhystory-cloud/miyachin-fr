@@ -39,7 +39,6 @@ class SpreadData:
     error: Optional[str] = None
     timestamp: float = 0.0
     earnings_date: Optional[str] = None
-    rollover_fee: Optional[float] = None
 
 
 class BTCCScraper:
