@@ -91,6 +91,13 @@
         .low-spread { background: rgba(52, 211, 153, 0.15); color: var(--success-color); }
         .high-spread { background: rgba(251, 113, 133, 0.15); color: var(--error-color); }
 
+        /* Stale (cached) data badge */
+        .stale-badge {
+            font-size: 0.6rem; padding: 0.15rem 0.4rem; border-radius: 4px;
+            background: rgba(251, 191, 36, 0.15); color: #fbbf24;
+            font-weight: 700; text-transform: uppercase; margin-left: 6px;
+        }
+
         /* Earnings Styles */
         .earnings-date { font-size: 0.85rem; color: #fff; font-weight: 500; }
         .soon-badge {
@@ -273,11 +280,16 @@
 
             // Table rows
             filtered.sort((a, b) => {
-                if (a.success !== b.success) return b.success ? 1 : -1; 
-                return a.spread_pct - b.spread_pct;
+                // Live first, then stale, then failed
+                const rank = r => r.success && !r.stale ? 0 : (r.success && r.stale ? 1 : 2);
+                const ra = rank(a), rb = rank(b);
+                if (ra !== rb) return ra - rb;
+                if (a.success && b.success) return a.spread_pct - b.spread_pct;
+                return 0;
             });
             let html = '';
             filtered.forEach((r, idx) => {
+                const isStale = r.stale === true;
                 const pctClass = r.success ? (r.spread_pct < 0.05 ? 'low-spread' : (r.spread_pct > 0.3 ? 'high-spread' : '')) : '';
                 const catClass = `cat-${r.category}`;
                 
@@ -292,15 +304,20 @@
                 const spreadDisplay = r.success ? r.spread.toFixed(4) : '--';
                 const spreadPctDisplay = r.success ? `${r.spread_pct.toFixed(4)}%` : 'N/A';
 
+                // Row opacity: live=full, stale=dimmed, failed=more dimmed
+                const rowOpacity = r.success ? (isStale ? 'opacity: 0.6;' : '') : 'opacity: 0.4;';
+                const staleBadge = isStale ? '<span class="stale-badge">Cached</span>' : '';
+
                 html += `
-                    <tr class="animate-row" style="animation-delay: ${idx * 0.02}s; ${r.success ? '' : 'opacity: 0.5;'}">
+                    <tr class="animate-row" style="animation-delay: ${idx * 0.02}s; ${rowOpacity}">
                         <td>
                             <span class="category-dot ${catClass}"></span>
                             <div style="display: inline-block; vertical-align: middle;">
-                                <span class="symbol-ticker">${r.symbol}</span>
+                                <span class="symbol-ticker">${r.symbol}${staleBadge}</span>
                                 <span class="symbol-name">${r.name}</span>
                                 ${r.earnings_date ? `<span class="mobile-earnings">Next: ${displayDate}${soon ? ' (Soon)' : ''}</span>` : ''}
                                 ${!r.success ? `<span class="mobile-earnings" style="color:var(--error-color)">Closed / No Data</span>` : ''}
+                                ${isStale ? `<span class="mobile-earnings" style="color:#fbbf24">Last known price</span>` : ''}
                             </div>
                         </td>
                         <td class="col-hide-mobile"><span style="font-size: 0.7rem; color: var(--text-secondary)">${r.category.toUpperCase()}</span></td>

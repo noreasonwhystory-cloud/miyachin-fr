@@ -10,6 +10,7 @@ BTCC Tradfiスプレッド調査ツール - スクレイパー（WebSocket傍受
 - 数秒で全銘柄の価格を最新化できる。
 """
 
+import os
 import time
 import json
 import asyncio
@@ -21,6 +22,7 @@ from config import (
     BTCC_BASE_URL,
     HEADLESS,
     PAGE_LOAD_TIMEOUT_SECONDS,
+    LOG_DIR,
     get_all_symbols,
 )
 
@@ -39,10 +41,13 @@ class SpreadData:
     error: Optional[str] = None
     timestamp: float = 0.0
     earnings_date: Optional[str] = None
+    stale: bool = False  # True = キャッシュされた古いデータ
 
 
 class BTCCScraper:
     """WebSocketを傍受して全Tradfi銘柄の価格を取得するスクレイパー"""
+
+    PRICE_CACHE_FILE = os.path.join(LOG_DIR, "price_cache.json")
 
     def __init__(self, sys_logger):
         self.sys_logger = sys_logger
@@ -56,6 +61,55 @@ class BTCCScraper:
         self._context: Optional[BrowserContext] = None
         self._page: Optional[Page] = None
         self._ws_connected = False
+
+        # 起動時にキャッシュを読み込む
+        self._load_price_cache()
+
+    def _load_price_cache(self):
+        """前回保存された価格キャッシュをディスクから読み込む"""
+        try:
+            if os.path.exists(self.PRICE_CACHE_FILE):
+                with open(self.PRICE_CACHE_FILE, "r", encoding="utf-8") as f:
+                    cache = json.load(f)
+                count = 0
+                for sym, data in cache.items():
+                    if sym in self._symbols_map:
+                        info = self._symbols_map[sym]
+                        self._price_buffer[sym] = SpreadData(
+                            symbol=sym,
+                            name=info["name"],
+                            category=info["category"],
+                            bid=data["bid"],
+                            ask=data["ask"],
+                            spread=data["spread"],
+                            spread_pct=data["spread_pct"],
+                            success=True,
+                            timestamp=data["timestamp"],
+                            stale=True,  # キャッシュ由来
+                        )
+                        count += 1
+                self.sys_logger.info(f"価格キャッシュ読み込み: {count}銘柄")
+        except Exception as e:
+            self.sys_logger.warning(f"価格キャッシュ読み込み失敗（初回起動なら正常）: {e}")
+
+    def _save_price_cache(self):
+        """現在のライブ価格データをディスクに保存する"""
+        try:
+            cache = {}
+            for sym, data in self._price_buffer.items():
+                if data.success:
+                    cache[sym] = {
+                        "bid": data.bid,
+                        "ask": data.ask,
+                        "spread": data.spread,
+                        "spread_pct": data.spread_pct,
+                        "timestamp": data.timestamp,
+                    }
+            os.makedirs(os.path.dirname(self.PRICE_CACHE_FILE), exist_ok=True)
+            with open(self.PRICE_CACHE_FILE, "w", encoding="utf-8") as f:
+                json.dump(cache, f, indent=2)
+        except Exception as e:
+            self.sys_logger.error(f"価格キャッシュ保存失敗: {e}")
 
     async def start(self):
         """ブラウザを起動し、WebSocketを直接操作して全銘柄の購読を開始する"""
@@ -230,16 +284,23 @@ class BTCCScraper:
 
     async def get_all_spreads(self) -> List[SpreadData]:
         """バッファにある全ての銘柄の最新スプレッドを返す"""
-        # データが揃うまで最大15秒待つ
+        # stale でないデータ（ライブデータ）の数をカウント
+        live_count = sum(1 for d in self._price_buffer.values() if not d.stale)
         wait_start = time.time()
-        self.sys_logger.info(f"価格データ収集中... (現在取得済み: {len(self._price_buffer)}/{len(self._symbols_map)})")
+        self.sys_logger.info(f"価格データ収集中... (ライブ取得済み: {live_count}/{len(self._symbols_map)})")
         
-        while len(self._price_buffer) < len(self._symbols_map):
+        while live_count < len(self._symbols_map):
             if time.time() - wait_start > 15:
                 break
             await asyncio.sleep(0.5)
+            live_count = sum(1 for d in self._price_buffer.values() if not d.stale)
         
-        self.sys_logger.info(f"データ収集完了: {len(self._price_buffer)}銘柄取得")
+        live_final = sum(1 for d in self._price_buffer.values() if not d.stale)
+        stale_final = sum(1 for d in self._price_buffer.values() if d.stale)
+        self.sys_logger.info(f"データ収集完了: ライブ={live_final}, キャッシュ={stale_final}")
+
+        # ライブデータの保存（次回起動時のキャッシュ用）
+        self._save_price_cache()
 
         results = []
         for symbol, info in self._symbols_map.items():
@@ -251,7 +312,7 @@ class BTCCScraper:
                     name=info["name"],
                     category=info["category"],
                     success=False,
-                    error="No WS data"
+                    error="Market closed / No data"
                 ))
         
         return results
