@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-25 05:26:58",
+  "last_updated": "2026-04-25 06:13:30",
   "results": [
     {
       "symbol": "XAUUSD",
@@ -13,7 +13,7 @@
       "error": null,
       "timestamp": 1777062433.387468,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XAGUSD",
@@ -27,7 +27,7 @@
       "error": null,
       "timestamp": 1777062433.3876011,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XPTUSD",
@@ -41,7 +41,7 @@
       "error": null,
       "timestamp": 1777062433.541293,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XPDUSD",
@@ -55,7 +55,7 @@
       "error": null,
       "timestamp": 1777062433.0526779,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XALUSD",
@@ -83,7 +83,7 @@
       "error": null,
       "timestamp": 1777062426.2202063,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "USOIL",
@@ -97,7 +97,7 @@
       "error": null,
       "timestamp": 1777062433.5410864,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "UKOIL",
@@ -111,7 +111,7 @@
       "error": null,
       "timestamp": 1777062433.0437837,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "NGAS",
@@ -125,7 +125,7 @@
       "error": null,
       "timestamp": 1777062426.8813388,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "SP500",
@@ -139,7 +139,7 @@
       "error": null,
       "timestamp": 1777062433.5409305,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "TECH100",
@@ -153,7 +153,7 @@
       "error": null,
       "timestamp": 1777062433.5412138,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "DJ30",
@@ -167,7 +167,7 @@
       "error": null,
       "timestamp": 1777062432.0814762,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "GER30",
@@ -195,7 +195,7 @@
       "error": null,
       "timestamp": 1777062424.5481002,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "UK100",
@@ -223,7 +223,7 @@
       "error": null,
       "timestamp": 1777062433.4106054,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "EURUSD",
@@ -237,7 +237,7 @@
       "error": null,
       "timestamp": 1777062432.1292794,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "AUDUSD",
@@ -251,7 +251,7 @@
       "error": null,
       "timestamp": 1777062432.7417839,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "NZDUSD",
@@ -265,7 +265,7 @@
       "error": null,
       "timestamp": 1777062428.1343555,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "AAPL",
