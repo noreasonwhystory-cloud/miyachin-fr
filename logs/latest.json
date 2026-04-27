@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-28 05:44:54",
+  "last_updated": "2026-04-28 06:41:03",
   "results": [
     {
       "symbol": "XAUUSD",
@@ -13,7 +13,7 @@
       "error": null,
       "timestamp": 1777322709.3001134,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XAGUSD",
@@ -27,7 +27,7 @@
       "error": null,
       "timestamp": 1777322709.300016,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XPTUSD",
@@ -41,7 +41,7 @@
       "error": null,
       "timestamp": 1777322709.8959668,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XPDUSD",
@@ -55,7 +55,7 @@
       "error": null,
       "timestamp": 1777322701.832936,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XALUSD",
@@ -83,7 +83,7 @@
       "error": null,
       "timestamp": 1777322699.3738973,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "USOIL",
@@ -97,7 +97,7 @@
       "error": null,
       "timestamp": 1777322708.33814,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "UKOIL",
@@ -111,7 +111,7 @@
       "error": null,
       "timestamp": 1777322709.3570569,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "NGAS",
@@ -125,7 +125,7 @@
       "error": null,
       "timestamp": 1777322704.822956,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "SP500",
@@ -139,7 +139,7 @@
       "error": null,
       "timestamp": 1777322709.6531482,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "TECH100",
@@ -153,7 +153,7 @@
       "error": null,
       "timestamp": 1777322709.6637526,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "DJ30",
@@ -167,7 +167,7 @@
       "error": null,
       "timestamp": 1777322706.538902,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "GER30",
@@ -195,7 +195,7 @@
       "error": null,
       "timestamp": 1777322698.3867385,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "UK100",
@@ -215,13 +215,13 @@
       "symbol": "GBPUSD",
       "name": "ポンド/ドル",
       "category": "forex",
-      "bid": 1.35331,
-      "ask": 1.3534,
+      "bid": 1.3537,
+      "ask": 1.35379,
       "spread": 9e-05,
-      "spread_pct": 0.00665,
+      "spread_pct": 0.006648,
       "success": true,
       "error": null,
-      "timestamp": 1777322709.5914383,
+      "timestamp": 1777326077.1723058,
       "earnings_date": null,
       "stale": false
     },
@@ -229,13 +229,13 @@
       "symbol": "EURUSD",
       "name": "ユーロ/ドル",
       "category": "forex",
-      "bid": 1.17225,
-      "ask": 1.17234,
-      "spread": 9e-05,
-      "spread_pct": 0.007677,
+      "bid": 1.1722,
+      "ask": 1.1723,
+      "spread": 0.0001,
+      "spread_pct": 0.008531,
       "success": true,
       "error": null,
-      "timestamp": 1777322709.1467052,
+      "timestamp": 1777326073.9171717,
       "earnings_date": null,
       "stale": false
     },
@@ -243,13 +243,13 @@
       "symbol": "AUDUSD",
       "name": "豪ドル/ドル",
       "category": "forex",
-      "bid": 0.71861,
-      "ask": 0.71872,
-      "spread": 0.00011,
-      "spread_pct": 0.015306,
+      "bid": 0.71856,
+      "ask": 0.71864,
+      "spread": 8e-05,
+      "spread_pct": 0.011133,
       "success": true,
       "error": null,
-      "timestamp": 1777322708.7073493,
+      "timestamp": 1777326076.3556507,
       "earnings_date": null,
       "stale": false
     },
@@ -257,13 +257,13 @@
       "symbol": "NZDUSD",
       "name": "NZドル/ドル",
       "category": "forex",
-      "bid": 0.59093,
-      "ask": 0.59103,
+      "bid": 0.59084,
+      "ask": 0.59094,
       "spread": 0.0001,
-      "spread_pct": 0.016921,
+      "spread_pct": 0.016924,
       "success": true,
       "error": null,
-      "timestamp": 1777322706.7229974,
+      "timestamp": 1777326076.827503,
       "earnings_date": null,
       "stale": false
     },
