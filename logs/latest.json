@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-14 04:26:17",
+  "last_updated": "2026-05-14 06:07:50",
   "results": [
     {
       "symbol": "XAUUSD",
@@ -13,7 +13,7 @@
       "error": null,
       "timestamp": 1778700392.3246207,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XAGUSD",
@@ -27,7 +27,7 @@
       "error": null,
       "timestamp": 1778700391.7550247,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XPTUSD",
@@ -41,7 +41,7 @@
       "error": null,
       "timestamp": 1778700384.7873282,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XPDUSD",
@@ -55,7 +55,7 @@
       "error": null,
       "timestamp": 1778700384.8829713,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "XALUSD",
@@ -83,7 +83,7 @@
       "error": null,
       "timestamp": 1778700391.5426102,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "USOIL",
@@ -97,7 +97,7 @@
       "error": null,
       "timestamp": 1778700391.3104672,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "UKOIL",
@@ -111,7 +111,7 @@
       "error": null,
       "timestamp": 1778700391.5422468,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "NGAS",
@@ -125,7 +125,7 @@
       "error": null,
       "timestamp": 1778700392.1488366,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "SP500",
@@ -139,7 +139,7 @@
       "error": null,
       "timestamp": 1778700392.1486917,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "TECH100",
@@ -153,7 +153,7 @@
       "error": null,
       "timestamp": 1778700392.32532,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "DJ30",
@@ -167,7 +167,7 @@
       "error": null,
       "timestamp": 1778700391.3836904,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "GER30",
@@ -181,7 +181,7 @@
       "error": null,
       "timestamp": 1778700391.5525467,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "JPN225",
@@ -195,7 +195,7 @@
       "error": null,
       "timestamp": 1778700391.6914995,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "UK100",
@@ -209,7 +209,7 @@
       "error": null,
       "timestamp": 1778700391.7556927,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "GBPUSD",
@@ -223,7 +223,7 @@
       "error": null,
       "timestamp": 1778700392.0536919,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "EURUSD",
@@ -237,7 +237,7 @@
       "error": null,
       "timestamp": 1778700391.2482126,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "AUDUSD",
@@ -251,7 +251,7 @@
       "error": null,
       "timestamp": 1778700391.5849113,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "NZDUSD",
@@ -265,19 +265,19 @@
       "error": null,
       "timestamp": 1778700390.3719516,
       "earnings_date": null,
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "AAPL",
       "name": "Apple",
       "category": "stocks",
-      "bid": 298.73,
-      "ask": 299.03,
+      "bid": 298.82,
+      "ask": 299.12,
       "spread": 0.3,
-      "spread_pct": 0.100375,
+      "spread_pct": 0.100345,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.1186361,
+      "timestamp": 1778706485.325463,
       "earnings_date": "2026-07-30",
       "stale": false
     },
@@ -285,13 +285,13 @@
       "symbol": "AMD",
       "name": "AMD",
       "category": "stocks",
-      "bid": 448.24,
-      "ask": 448.69,
+      "bid": 445.98,
+      "ask": 446.43,
       "spread": 0.45,
-      "spread_pct": 0.100342,
+      "spread_pct": 0.100851,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.179483,
+      "timestamp": 1778706485.2056358,
       "earnings_date": "2026-08-04",
       "stale": false
     },
@@ -299,13 +299,13 @@
       "symbol": "AMZN",
       "name": "Amazon",
       "category": "stocks",
-      "bid": 269.29,
-      "ask": 269.61,
-      "spread": 0.32,
-      "spread_pct": 0.11876,
+      "bid": 270.27,
+      "ask": 270.54,
+      "spread": 0.27,
+      "spread_pct": 0.09985,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.3254247,
+      "timestamp": 1778706485.1136327,
       "earnings_date": "2026-07-30",
       "stale": false
     },
@@ -313,13 +313,13 @@
       "symbol": "COST",
       "name": "Costco",
       "category": "stocks",
-      "bid": 1032.57,
-      "ask": 1033.6,
+      "bid": 1029.29,
+      "ask": 1030.32,
       "spread": 1.03,
-      "spread_pct": 0.099701,
+      "spread_pct": 0.100019,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.2245474,
+      "timestamp": 1778706485.1137369,
       "earnings_date": "2026-05-28",
       "stale": false
     },
@@ -335,7 +335,7 @@
       "error": null,
       "timestamp": 1778700392.2463646,
       "earnings_date": "2026-07-23",
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "INTEL",
@@ -349,19 +349,19 @@
       "error": null,
       "timestamp": 1778700391.9036784,
       "earnings_date": "2026-07-23",
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "META",
       "name": "Meta",
       "category": "stocks",
-      "bid": 616.45,
-      "ask": 617.07,
+      "bid": 615.13,
+      "ask": 615.75,
       "spread": 0.62,
-      "spread_pct": 0.100525,
+      "spread_pct": 0.100741,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.3256094,
+      "timestamp": 1778706485.3303945,
       "earnings_date": "2026-07-29",
       "stale": false
     },
@@ -369,13 +369,13 @@
       "symbol": "MSFT",
       "name": "Microsoft",
       "category": "stocks",
-      "bid": 404.97,
-      "ask": 405.38,
+      "bid": 404.85,
+      "ask": 405.26,
       "spread": 0.41,
-      "spread_pct": 0.101191,
+      "spread_pct": 0.101221,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.1187613,
+      "timestamp": 1778706485.2228556,
       "earnings_date": "2026-07-29",
       "stale": false
     },
@@ -383,13 +383,13 @@
       "symbol": "MSTR",
       "name": "MicroStrategy",
       "category": "stocks",
-      "bid": 178.64,
-      "ask": 178.82,
+      "bid": 178.31,
+      "ask": 178.49,
       "spread": 0.18,
-      "spread_pct": 0.100711,
+      "spread_pct": 0.100897,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.3470764,
+      "timestamp": 1778706485.2681499,
       "earnings_date": "2026-07-30",
       "stale": false
     },
@@ -397,13 +397,13 @@
       "symbol": "NFLX",
       "name": "Netflix",
       "category": "stocks",
-      "bid": 88.01,
-      "ask": 88.14,
+      "bid": 87.65,
+      "ask": 87.78,
       "spread": 0.13,
-      "spread_pct": 0.147601,
+      "spread_pct": 0.148207,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.2874193,
+      "timestamp": 1778706485.2979543,
       "earnings_date": "2026-07-16",
       "stale": false
     },
@@ -419,19 +419,19 @@
       "error": null,
       "timestamp": 1778700392.3255315,
       "earnings_date": "2026-05-20",
-      "stale": false
+      "stale": true
     },
     {
       "symbol": "ORCL",
       "name": "Oracle",
       "category": "stocks",
-      "bid": 190.59,
-      "ask": 190.94,
-      "spread": 0.35,
-      "spread_pct": 0.183472,
+      "bid": 190.23,
+      "ask": 190.42,
+      "spread": 0.19,
+      "spread_pct": 0.099829,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.2236893,
+      "timestamp": 1778706485.1593688,
       "earnings_date": "2026-06-10",
       "stale": false
     },
@@ -439,13 +439,13 @@
       "symbol": "PLTR",
       "name": "Palantir",
       "category": "stocks",
-      "bid": 130.11,
-      "ask": 130.24,
+      "bid": 130.13,
+      "ask": 130.26,
       "spread": 0.13,
-      "spread_pct": 0.099866,
+      "spread_pct": 0.09985,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.2458947,
+      "timestamp": 1778706485.3493903,
       "earnings_date": "2026-08-03",
       "stale": false
     },
@@ -453,13 +453,13 @@
       "symbol": "TSLA",
       "name": "Tesla",
       "category": "stocks",
-      "bid": 444.13,
-      "ask": 444.66,
-      "spread": 0.53,
-      "spread_pct": 0.119263,
+      "bid": 446.05,
+      "ask": 446.59,
+      "spread": 0.54,
+      "spread_pct": 0.120989,
       "success": true,
       "error": null,
-      "timestamp": 1778700392.2246683,
+      "timestamp": 1778706485.405671,
       "earnings_date": "2026-07-22",
       "stale": false
     },
@@ -467,13 +467,13 @@
       "symbol": "TSM",
       "name": "TSMC",
       "category": "stocks",
-      "bid": 400.59,
+      "bid": 400.64,
       "ask": 401.04,
-      "spread": 0.45,
-      "spread_pct": 0.112271,
+      "spread": 0.4,
+      "spread_pct": 0.09979,
       "success": true,
       "error": null,
-      "timestamp": 1778700391.2374442,
+      "timestamp": 1778706485.1478758,
       "earnings_date": "2026-07-16",
       "stale": false
     }
