@@ -1,10 +1,10 @@
 {
   "AAPL": {
-    "bid": 298.32,
-    "ask": 298.62,
+    "bid": 297.88,
+    "ask": 298.18,
     "spread": 0.3,
-    "spread_pct": 0.100513,
-    "timestamp": 1778784741.262632
+    "spread_pct": 0.100661,
+    "timestamp": 1778790394.3325322
   },
   "COPPER": {
     "bid": 658.63,
@@ -14,46 +14,46 @@
     "timestamp": 1778745929.310647
   },
   "META": {
-    "bid": 616.28,
-    "ask": 617.12,
-    "spread": 0.84,
-    "spread_pct": 0.136209,
-    "timestamp": 1778784741.65736
+    "bid": 617.57,
+    "ask": 618.19,
+    "spread": 0.62,
+    "spread_pct": 0.100343,
+    "timestamp": 1778790394.108756
   },
   "MSFT": {
-    "bid": 408.89,
-    "ask": 409.3,
+    "bid": 408.16,
+    "ask": 408.57,
     "spread": 0.41,
-    "spread_pct": 0.100221,
-    "timestamp": 1778784741.2525792
+    "spread_pct": 0.1004,
+    "timestamp": 1778790394.2394469
   },
   "ORCL": {
-    "bid": 196.93,
-    "ask": 197.13,
-    "spread": 0.2,
-    "spread_pct": 0.101507,
-    "timestamp": 1778784741.2953157
+    "bid": 195.54,
+    "ask": 195.8,
+    "spread": 0.26,
+    "spread_pct": 0.132877,
+    "timestamp": 1778790394.3449304
   },
   "DJ30": {
-    "bid": 50163.23,
-    "ask": 50164.43,
-    "spread": 1.2,
-    "spread_pct": 0.002392,
-    "timestamp": 1778784740.2806573
+    "bid": 50124.21,
+    "ask": 50125.37,
+    "spread": 1.16,
+    "spread_pct": 0.002314,
+    "timestamp": 1778790394.3032076
   },
   "TECH100": {
-    "bid": 29700.34,
-    "ask": 29700.76,
-    "spread": 0.42,
-    "spread_pct": 0.001414,
-    "timestamp": 1778784741.5951726
+    "bid": 29681.74,
+    "ask": 29682.22,
+    "spread": 0.48,
+    "spread_pct": 0.001617,
+    "timestamp": 1778790394.3022342
   },
   "XAUUSD": {
-    "bid": 4669.43,
-    "ask": 4669.63,
-    "spread": 0.2,
-    "spread_pct": 0.004283,
-    "timestamp": 1778784741.3815835
+    "bid": 4647.41,
+    "ask": 4647.59,
+    "spread": 0.18,
+    "spread_pct": 0.003873,
+    "timestamp": 1778790394.322855
   },
   "UK100": {
     "bid": 10392.15,
@@ -63,11 +63,11 @@
     "timestamp": 1778784739.8225543
   },
   "UKOIL": {
-    "bid": 105.94,
-    "ask": 105.974,
-    "spread": 0.034,
-    "spread_pct": 0.032088,
-    "timestamp": 1778784740.5160015
+    "bid": 106.488,
+    "ask": 106.526,
+    "spread": 0.038,
+    "spread_pct": 0.035678,
+    "timestamp": 1778790392.8310153
   },
   "INTEL": {
     "bid": 116.42,
@@ -77,32 +77,32 @@
     "timestamp": 1778784741.5946746
   },
   "JPN225": {
-    "bid": 62940.9,
-    "ask": 62950.6,
-    "spread": 9.7,
-    "spread_pct": 0.01541,
-    "timestamp": 1778784741.5943975
+    "bid": 63008.0,
+    "ask": 63048.0,
+    "spread": 40.0,
+    "spread_pct": 0.063464,
+    "timestamp": 1778790392.5238888
   },
   "NZDUSD": {
-    "bid": 0.59165,
-    "ask": 0.59177,
-    "spread": 0.00012,
-    "spread_pct": 0.02028,
-    "timestamp": 1778784741.6572356
+    "bid": 0.59094,
+    "ask": 0.59102,
+    "spread": 8e-05,
+    "spread_pct": 0.013537,
+    "timestamp": 1778790390.7727442
   },
   "NFLX": {
-    "bid": 86.75,
-    "ask": 86.88,
+    "bid": 86.84,
+    "ask": 86.97,
     "spread": 0.13,
-    "spread_pct": 0.149744,
-    "timestamp": 1778784741.116326
+    "spread_pct": 0.149589,
+    "timestamp": 1778790394.3012686
   },
   "AMD": {
-    "bid": 447.02,
-    "ask": 447.47,
+    "bid": 447.61,
+    "ask": 448.06,
     "spread": 0.45,
-    "spread_pct": 0.100616,
-    "timestamp": 1778784741.3177352
+    "spread_pct": 0.100483,
+    "timestamp": 1778790394.088694
   },
   "GER30": {
     "bid": 24411.98,
@@ -112,18 +112,18 @@
     "timestamp": 1778784741.0223985
   },
   "XAGUSD": {
-    "bid": 84.362,
-    "ask": 84.465,
-    "spread": 0.103,
-    "spread_pct": 0.122018,
-    "timestamp": 1778784741.3461843
+    "bid": 83.208,
+    "ask": 83.313,
+    "spread": 0.105,
+    "spread_pct": 0.12611,
+    "timestamp": 1778790393.2575982
   },
   "PLTR": {
-    "bid": 133.79,
-    "ask": 133.92,
+    "bid": 133.16,
+    "ask": 133.29,
     "spread": 0.13,
-    "spread_pct": 0.09712,
-    "timestamp": 1778784741.1674194
+    "spread_pct": 0.097579,
+    "timestamp": 1778790394.1766906
   },
   "GOOG": {
     "bid": 399.93,
@@ -133,25 +133,25 @@
     "timestamp": 1778784739.2200098
   },
   "NGAS": {
-    "bid": 2.9078,
-    "ask": 2.9204,
+    "bid": 2.9081,
+    "ask": 2.9207,
     "spread": 0.0126,
-    "spread_pct": 0.43238,
-    "timestamp": 1778784741.0221703
+    "spread_pct": 0.432336,
+    "timestamp": 1778790391.7096734
   },
   "SP500": {
-    "bid": 7522.25,
-    "ask": 7522.59,
-    "spread": 0.34,
-    "spread_pct": 0.00452,
-    "timestamp": 1778784740.5154977
+    "bid": 7517.38,
+    "ask": 7517.74,
+    "spread": 0.36,
+    "spread_pct": 0.004789,
+    "timestamp": 1778790393.084575
   },
   "EURUSD": {
-    "bid": 1.16748,
-    "ask": 1.16759,
+    "bid": 1.16664,
+    "ask": 1.16675,
     "spread": 0.00011,
-    "spread_pct": 0.009422,
-    "timestamp": 1778784740.2711172
+    "spread_pct": 0.009428,
+    "timestamp": 1778790393.265751
   },
   "NVIDIA": {
     "bid": 235.8,
@@ -161,67 +161,67 @@
     "timestamp": 1778784740.8841429
   },
   "USOIL": {
-    "bid": 97.115,
-    "ask": 97.149,
+    "bid": 97.62,
+    "ask": 97.654,
     "spread": 0.034,
-    "spread_pct": 0.035004,
-    "timestamp": 1778784741.3812578
+    "spread_pct": 0.034823,
+    "timestamp": 1778790393.957463
   },
   "TSLA": {
-    "bid": 445.57,
-    "ask": 446.11,
-    "spread": 0.54,
-    "spread_pct": 0.12112,
-    "timestamp": 1778784741.2730093
+    "bid": 442.6,
+    "ask": 443.13,
+    "spread": 0.53,
+    "spread_pct": 0.119675,
+    "timestamp": 1778790394.088807
   },
   "AMZN": {
-    "bid": 267.42,
-    "ask": 267.74,
-    "spread": 0.32,
-    "spread_pct": 0.11959,
-    "timestamp": 1778784741.457432
+    "bid": 267.0,
+    "ask": 267.27,
+    "spread": 0.27,
+    "spread_pct": 0.101072,
+    "timestamp": 1778790394.2581975
   },
   "GBPUSD": {
-    "bid": 1.34026,
-    "ask": 1.34035,
-    "spread": 9e-05,
-    "spread_pct": 0.006715,
-    "timestamp": 1778784741.0579488
+    "bid": 1.33979,
+    "ask": 1.3399,
+    "spread": 0.00011,
+    "spread_pct": 0.00821,
+    "timestamp": 1778790393.5056794
   },
   "AUDUSD": {
-    "bid": 0.7223,
-    "ask": 0.72241,
+    "bid": 0.72186,
+    "ask": 0.72197,
     "spread": 0.00011,
-    "spread_pct": 0.015228,
-    "timestamp": 1778784741.0795999
+    "spread_pct": 0.015237,
+    "timestamp": 1778790393.084699
   },
   "TSM": {
-    "bid": 418.53,
-    "ask": 418.95,
+    "bid": 417.56,
+    "ask": 417.98,
     "spread": 0.42,
-    "spread_pct": 0.100301,
-    "timestamp": 1778784741.1682162
+    "spread_pct": 0.100534,
+    "timestamp": 1778790394.2289565
   },
   "MSTR": {
-    "bid": 189.85,
-    "ask": 190.04,
+    "bid": 186.29,
+    "ask": 186.48,
     "spread": 0.19,
-    "spread_pct": 0.100029,
-    "timestamp": 1778784741.3048255
+    "spread_pct": 0.10194,
+    "timestamp": 1778790394.2377865
   },
   "XPTUSD": {
-    "bid": 2064.83,
-    "ask": 2074.69,
+    "bid": 2052.46,
+    "ask": 2062.32,
     "spread": 9.86,
-    "spread_pct": 0.476384,
-    "timestamp": 1778784741.6574697
+    "spread_pct": 0.479248,
+    "timestamp": 1778790392.3935316
   },
   "COST": {
-    "bid": 1034.84,
-    "ask": 1035.91,
-    "spread": 1.07,
-    "spread_pct": 0.103344,
-    "timestamp": 1778784741.263623
+    "bid": 1037.44,
+    "ask": 1041.87,
+    "spread": 4.43,
+    "spread_pct": 0.426103,
+    "timestamp": 1778790394.1100802
   },
   "XALUSD": {
     "bid": 3638.33,
